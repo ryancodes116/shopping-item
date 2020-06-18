@@ -1,80 +1,21 @@
 <template>
   <div id="app">
-    <div class="nav-bar"></div>
-
-    <div class="product">
-      <div class="product-image">
-        <img :src="image" :alt="alt" />
-      </div>
-
-      <div class="product-info">
-        <h1>{{ product }}</h1>
-        <p v-if="inStock">In Stock</p>
-
-        <p v-else :class="{out: !inStock}">Out of Stock</p>
-
-        <ul>
-          <li v-for="detail in details" v-bind:key="detail">{{detail}}</li>
-        </ul>
-
-        <div
-          v-for="variant in variants"
-          v-bind:key="variant.variantID"
-          class="color-box"
-          :style="{ backgroundColor: variant.variantColor }"
-          @mouseover="updateProduct(variant.variantImage)"
-        ></div>
-
-        <button
-          v-on:click="addToCart"
-          v-bind:disabled="!inStock"
-          :class="{ disabledButton: !inStock }"
-        >Add to Cart</button>
-
-        <div class="cart">
-          <p>Cart({{cart}})</p>
-        </div>
-      </div>
-    </div>
+    <Product :premium="premium" />
   </div>
 </template>
 
 <script>
+import Product from "./components/Product";
+
 export default {
   name: "App",
-  components: {},
+  components: {
+    Product
+  },
   data() {
     return {
-      product: "Socks",
-      image:
-        "https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg",
-      alt: "Photo of Vue socks",
-      inStock: true,
-      details: ["80% cotton", "20% polyester", "Gender-neutral"],
-      variants: [
-        {
-          variantID: 2234,
-          variantColor: "green",
-          variantImage:
-            "https://www.vuemastery.com/images/challenges/vmSocks-green-onWhite.jpg"
-        },
-        {
-          variantID: 2235,
-          variantColor: "blue",
-          variantImage:
-            "https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg"
-        }
-      ],
-      cart: 0
+      premium: true
     };
-  },
-  methods: {
-    addToCart() {
-      this.cart++;
-    },
-    updateProduct(variantImage) {
-      this.image = variantImage;
-    }
   }
 };
 </script>
