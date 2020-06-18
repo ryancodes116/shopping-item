@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <Product :premium="premium" />
+    <div class="cart">
+      <p>Cart({{cart.length}})</p>
+    </div>
+
+    <Product :premium="premium" @add-to-cart="updateCart" />
   </div>
 </template>
 
@@ -14,8 +18,14 @@ export default {
   },
   data() {
     return {
-      premium: true
+      premium: false,
+      cart: []
     };
+  },
+  methods: {
+    updateCart(id) {
+      this.cart.push(id);
+    }
   }
 };
 </script>
@@ -74,6 +84,7 @@ button {
   height: 40px;
   width: 100px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .disabledButton {
