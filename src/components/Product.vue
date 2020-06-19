@@ -34,12 +34,22 @@
         >Add to Cart</button>
       </div>
     </div>
+
+    <ProductTabs :reviews="reviews" />
   </div>
 </template>
 
 <script>
+import Vue from "vue";
+var eventBus = new Vue();
+
+import ProductTabs from "./ProductTabs";
+
 export default {
   name: "Product",
+  components: {
+    ProductTabs
+  },
   props: {
     premium: {
       type: Boolean,
@@ -68,7 +78,8 @@ export default {
             "https://www.vuemastery.com/images/challenges/vmSocks-blue-onWhite.jpg",
           variantQuantity: 0
         }
-      ]
+      ],
+      reviews: []
     };
   },
   methods: {
@@ -96,6 +107,11 @@ export default {
         return 2.99;
       }
     }
+  },
+  mounted() {
+    eventBus.$on("review-submitted", productReview => {
+      this.reviews.push(productReview);
+    });
   }
 };
 </script>

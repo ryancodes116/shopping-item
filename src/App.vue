@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="cart">
-      <p>Cart({{cart.length}})</p>
+      <p>Cart ({{cart.length}})</p>
     </div>
 
     <Product :premium="premium" @add-to-cart="updateCart" />
@@ -45,6 +45,8 @@ body {
 
 .product {
   display: flex;
+  flex-flow: wrap;
+  padding: 1rem;
 }
 
 img {
@@ -55,12 +57,13 @@ img {
 }
 
 .product-image {
-  flex-basis: 700px;
+  width: 80%;
 }
 
+.product-image,
 .product-info {
   margin-top: 10px;
-  flex-basis: 500px;
+  width: 50%;
 }
 
 .color-box {
@@ -70,10 +73,11 @@ img {
 }
 
 .cart {
+  color: #fff;
   margin-right: 25px;
   float: right;
   border: 1px solid #d8d8d8;
-  padding: 5px 20px;
+  padding: 2px 20px;
 }
 
 button {
@@ -84,7 +88,6 @@ button {
   height: 40px;
   width: 100px;
   font-size: 14px;
-  cursor: pointer;
 }
 
 .disabledButton {
@@ -92,13 +95,14 @@ button {
 }
 
 .review-form {
-  width: 30%;
+  width: 400px;
   padding: 20px;
+  margin: 40px;
   border: 1px solid #d8d8d8;
 }
 
-.out {
-  text-decoration: line-through;
+.no-reviews {
+  margin-left: 3.5%;
 }
 
 input {
@@ -110,5 +114,15 @@ input {
 textarea {
   width: 100%;
   height: 60px;
+}
+
+.tabs {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.activeTab {
+  color: #16c0b0;
+  text-decoration: underline;
 }
 </style>
